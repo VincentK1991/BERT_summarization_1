@@ -9,4 +9,4 @@ As a companion to BERT, I added GPT2 summarization. This is so-called "abstracti
 I figured out how to train GPT2 model to a good outcome. The training is shown in the Ignite Engine notebook. The outcome of this is shown in the example notebook on BERTandGPT2_abstractive_summarization_Apr28_2020.
 
 # Using Ignite Engine for training GPT2
-Ignite is a pytorch-based library to help with training neural networks. We use this to write a compack code for training GPT2. 
+Ignite is a pytorch-based library to help with training neural networks. We use this to write a compack code for training GPT2.  The fine-tuned model weight tensor is available upon request.
