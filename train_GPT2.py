@@ -38,15 +38,17 @@ def main(args):
   if args.model_directory == None:
     model = GPT2DoubleHeadsModel.from_pretrained('distilgpt2')
     tokenizer = GPT2Tokenizer.from_pretrained('distilgpt2')
+    special_tokens = {'bos_token':'<|startoftext|>','eos_token':'<|endoftext|>','pad_token':'<pad>','additional_special_tokens':['<|keyword|>','<|summarize|>']}
+    print('total length of vocab should be 50261 = ', len(tokenizer))
+    model.resize_token_embeddings(len(tokenizer))
+    print('resize the model embedding layer')
   else:
     model = GPT2DoubleHeadsModel.from_pretrained(args.model_directory)
     tokenizer = GPT2Tokenizer.from_pretrained(args.model_directory)
+    special_tokens = {'bos_token':'<|startoftext|>','eos_token':'<|endoftext|>','pad_token':'<pad>','additional_special_tokens':['<|keyword|>','<|summarize|>']}
+    print('total length of vocab should be 50261 = ', len(tokenizer))
   
   # Add a [CLS] to the vocabulary (we should train it also!)
-  special_tokens = {'bos_token':'<|startoftext|>','eos_token':'<|endoftext|>','pad_token':'<pad>','additional_special_tokens':['<|keyword|>','<|summarize|>']}
-  #special_tokens2 = {'bos_token':'<|startoftext|>','eos_token':'<|endoftext|>','keyword_token':'<|keyword|>','summary_token':'<|summarize|>'}
-  tokenizer.add_special_tokens(special_tokens)
-  print('total length of vocab should be 50261 = ', len(tokenizer))
   print(' ')
 
   train_dataset = torch.load(args.train_data)
