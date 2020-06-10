@@ -25,7 +25,7 @@ I figured out how to train GPT2 model to a reasonable outcome. This notebook sum
 
 ## command line interface
 
-Update on June 10 2020. I added a more user friendly command line training code for the GPT2. This is the trainGPT2.py. To use it, first you'd need Huggingface's transformer package, and a folder where you'd want to save your fine-tuned model on.
+Update on June 10 2020. I added a more user friendly command line training/summarizer code for the GPT2. This is the trainGPT2.py and GPT2_summarizer.py. To use it, first you'd need Huggingface's transformer package, and a folder where you'd want to save your fine-tuned model on.
 For the training and validation dataset, refer to the notebook *pre-processing-text-for-GPT2-fine-tuning*.
 
 `pip install transformers==2.6.0`
@@ -34,3 +34,7 @@ For the training and validation dataset, refer to the notebook *pre-processing-t
 `python train_command_line.py --epochs=1 --train_data='insert-your-training-data-here' --val_data='insert-your-validation-data-here' --model_name='fine_tuned_folder'`
 
 You'd need GPU and cuda to train GPT2. 100 iterations took me about 44 seconds on 1 Nvidia Tesla P-100.
+
+To generate a summary
+
+`python GPT2_summarize.py --input_text=input --model_directory='insert-your-model-directory-here'`
