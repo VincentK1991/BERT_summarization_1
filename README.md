@@ -1,3 +1,8 @@
+# The pre-print article is out! 
+please visit, and suggest if you want to see any changes. I thanks our co-author/collaborators Bowen Tan and Yiming Niu from Rockefeller University. 
+https://arxiv.org/abs/2006.01997
+
+
 # Directory
 
 ## notebook
