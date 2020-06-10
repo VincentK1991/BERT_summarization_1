@@ -2,7 +2,7 @@
 
 ## notebook
 
-This folder contains colab notebooks that guide you through the summarization by BERT and GPT-2. You should be able to open it on your Google's colab, and play with your data. The text .csv file, the post-processed training tensor file, and fine-tuned model weight tensor are available upon request. 
+This folder contains colab notebooks that guide you through the summarization by BERT and GPT-2. You should be able to open it on your Google's colab, and play with your data. *The text .csv file, the post-processed training tensor file, and fine-tuned model weight tensor are available upon request.* 
 
 Both BERT and GPT-2 models are implemented in the Transformer library by HUggingface. The description of each notebooks are listed below. The citation and related works are in the "generate-summary-with-BERT-or-GPT2" notebook.
 
