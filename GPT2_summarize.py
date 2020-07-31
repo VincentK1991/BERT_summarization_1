@@ -23,13 +23,16 @@ def main(args):
   # Add a [CLS] to the vocabulary (we should train it also!)
   special_tokens = {'bos_token':'<|startoftext|>','eos_token':'<|endoftext|>','pad_token':'<pad>','additional_special_tokens':['<|keyword|>','<|summarize|>']}
   tokenizer.add_special_tokens(special_tokens)
-  print('total length of vocab should be 50261 = ', len(tokenizer))
+  assert len(tokenizer) == 50261, "tokenizer size is not 50261"
   model.resize_token_embeddings(len(tokenizer))
   print(' ')
 
-
+  file1 = open(args.input_file,'r')
+  input_text = file1.read()
+  file1.close()
+  
   model = model.to(device)
-  input_text = '<|startoftext|> ' + args.input_file +' <|summarize|>'
+  input_text = '<|startoftext|> ' + input_text +' <|summarize|>'
   input_token = tokenizer.encode(input_text)
   input_token_torch = torch.tensor(input_token, dtype=torch.long)
 
