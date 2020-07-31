@@ -42,4 +42,4 @@ You'd need GPU and cuda to train GPT2. 100 iterations took me about 44 seconds o
 
 To generate a summary
 
-`python GPT2_summarize.py --input_text=input --model_directory='insert-your-model-directory-here'`
+`python GPT2_summarize.py --input_file='input.txt' --model_directory='insert-your-model-directory-here'`
