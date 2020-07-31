@@ -29,7 +29,7 @@ def main(args):
 
 
   model = model.to(device)
-  input_text = '<|startoftext|> ' + args.input_text +' <|summarize|>'
+  input_text = '<|startoftext|> ' + args.input_file +' <|summarize|>'
   input_token = tokenizer.encode(input_text)
   input_token_torch = torch.tensor(input_token, dtype=torch.long)
 
@@ -54,8 +54,8 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='GPT2 generate summary')
 
-    parser.add_argument('--input_text', type=str,
-                        help='input keywords as text string to be summarized')
+    parser.add_argument('--input_file', type=str,
+                        help='text input file (.txt) to be summarized')
     parser.add_argument('--model_directory', type=str, default = None, 
                         help='path to the GPT2 model directory (must contain pytorch_model.bin, config.json, vocab.json, and merges.txt)')
     
