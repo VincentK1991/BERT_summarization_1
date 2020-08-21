@@ -12,8 +12,11 @@ For the training and validation dataset, refer to the notebook *pre-processing-t
 
 ## setting up the environment
 To install from the Pipfile
+
 `pipenv install`
+
 or to install from the requirements.txt
+
 `pip install -r requirements.txt`
 
 ## pre-processing
@@ -30,6 +33,7 @@ the output is the pytorch tensordataset
 Use the pytorch tensordataset to train the GPT2 (preferrably you separate the training and validation dataset how you like it)
 
 `mkdir fine_tuned_folder`
+
 `python train_command_line.py --epochs=1 --train_data='insert-your-training-data-here' --val_data='insert-your-validation-data-here' --model_name='fine_tuned_folder'`
 
 You'd need GPU and cuda to train GPT2. 100 iterations took me about 44 seconds on 1 Nvidia Tesla P-100.
