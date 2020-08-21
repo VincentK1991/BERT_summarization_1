@@ -15,6 +15,10 @@ print('use transformers version = ',transformers.__version__) # make sure it is 
 
 def main(args):
   """
+  executing the training given the arguments in CLI
+  output:
+    write pytorch model file, and config files
+    write training and validation statistics (in .json)
   """
   train_dict = {'lm_loss':[],'mc_loss':[],'total_loss':[]}
   val_dict = {'lm_loss':[],'mc_loss':[],'total_loss':[]}
@@ -31,7 +35,7 @@ def main(args):
     tokenizer = GPT2Tokenizer.from_pretrained(args.model_directory)
     special_tokens = {'bos_token':'<|startoftext|>','eos_token':'<|endoftext|>','pad_token':'<pad>','additional_special_tokens':['<|keyword|>','<|summarize|>']}
     print('total length of vocab should be 50261 = ', len(tokenizer))
-  
+
   # Add a [CLS] to the vocabulary (we should train it also!)
   print(' ')
 
@@ -64,7 +68,7 @@ def main(args):
         print("Trainer Results - epoch {} - LM loss: {:.2f} MC loss: {:.2f} total loss: {:.2f} report time: {:.1f} sec"
         .format(iterations, train_dict['lm_loss'][-1], train_dict['mc_loss'][-1], train_dict['total_loss'][-1],stop_iter - start_iter))
         start_iter = timeit.default_timer()
-    
+
     print('end-of-training-epoch')
     stop = timeit.default_timer()
     print("Trainer Results - epoch {} - LM loss: {:.2f} MC loss: {:.2f} total loss: {:.2f} report time: {:.1f} sec"
@@ -75,7 +79,7 @@ def main(args):
       val_dict['lm_loss'].append(lm_loss)
       val_dict['mc_loss'].append(mc_loss)
       val_dict['total_loss'].append(total_loss)
-    
+
     print('end-of-validation-epoch')
     stop_eval = timeit.default_timer()
     print("Evaluator Results - epoch {} - LM loss: {:.2f} MC loss: {:.2f} total loss: {:.2f} report time: {:.1f} sec"
@@ -126,7 +130,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='GPT2 summarizer')
     parser.add_argument('--epochs', type=int, default=1, metavar='E',
                         help='number of epochs to train for (default: 5)')
-    
+
     parser.add_argument('--learning_rate', type=float, default=5e-5, metavar='de_LR',
                         help='learning rate of the model (default: 5e-5)')
     parser.add_argument('--eps', type=float, default=1e-8, metavar='de_LR',
@@ -143,12 +147,12 @@ if __name__ == "__main__":
                         help='steps of iterations for learning rate scheduler warm up (default:50)')
     parser.add_argument('--print_every', type=int, default=100,
                         help='steps of iterations before printing the loss (default:100)')
-    
+
     parser.add_argument('--train_data', type=str,help='path to train tensor data .pt')
     parser.add_argument('--val_data', type=str,help='path to validation tensor data .pt')
     parser.add_argument('--model_name', type=str, default='GPT2_folder',
                         help='name of the model directory to be saved in (default: GPT2_folder)')
-    
-    parser.add_argument('--model_directory', type=str, default = None, 
+
+    parser.add_argument('--model_directory', type=str, default = None,
                         help='path to the GPT2 model directory (must contain pytorch_model.bin, config.json, vocab.json, and merges.txt)')
     main(parser.parse_args())

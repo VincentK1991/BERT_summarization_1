@@ -15,11 +15,13 @@ print('use transformers version = ',transformers.__version__) # make sure it is 
 
 def main(args):
   """
+  Execute the summarization from fine-tuned GPT2 model (given in arguments CLI)
+  write the summary.txt file
   """
 
   model = GPT2DoubleHeadsModel.from_pretrained(args.model_directory)
   tokenizer = GPT2Tokenizer.from_pretrained(args.model_directory)
-  
+
   # Add a [CLS] to the vocabulary (we should train it also!)
   special_tokens = {'bos_token':'<|startoftext|>','eos_token':'<|endoftext|>','pad_token':'<pad>','additional_special_tokens':['<|keyword|>','<|summarize|>']}
   tokenizer.add_special_tokens(special_tokens)
@@ -30,7 +32,7 @@ def main(args):
   file1 = open(args.input_file,'r')
   input_text = file1.read()
   file1.close()
-  
+
   model = model.to(device)
   input_text = '<|startoftext|> ' + input_text +' <|summarize|>'
   input_token = tokenizer.encode(input_text)
@@ -59,9 +61,9 @@ if __name__ == "__main__":
 
     parser.add_argument('--input_file', type=str,
                         help='text input file (.txt) to be summarized')
-    parser.add_argument('--model_directory', type=str, default = None, 
+    parser.add_argument('--model_directory', type=str, default = None,
                         help='path to the GPT2 model directory (must contain pytorch_model.bin, config.json, vocab.json, and merges.txt)')
-    
+
     parser.add_argument('--max_length',type=int,default=150,help='maximum token length to generate')
     parser.add_argument('--min_length',type=int,default=50,help='minimum token length to generate')
     parser.add_argument('--top_k',type=int,default=20,help='top k token candidates maximum to consider')
