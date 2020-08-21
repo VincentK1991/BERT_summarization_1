@@ -2,6 +2,45 @@
 please visit, and suggest if you want to see any changes. I thanks our co-authors/collaborators Bowen Tan and Yiming Niu from Rockefeller University. 
 https://arxiv.org/abs/2006.01997
 
+---
+
+# command line interface
+
+I added a more user friendly command line pre-processing/training/summarization codes for the GPT2. These are the GPT2_preprocessing.py, trainGPT2.py, and GPT2_summarizer.py. To use it, first you'd need Huggingface's transformer package, and a folder where you'd want to save your fine-tuned model on.
+For the training and validation dataset, refer to the notebook *pre-processing-text-for-GPT2-fine-tuning*.
+(Update on Aug 21 2020)
+
+## setting up the environment
+To install from the Pipfile
+`pipenv install`
+or to install from the requirements.txt
+`pip install -r requirements.txt`
+
+## pre-processing
+
+The code is in the GPT2_preprocessing.py and the helperGPT2.py.
+The pre-processing takes the input = metadata.csv given in the [COVID19 Open Research dataset](https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge)
+
+`python GPT2_preprocessing.py --input=metadata.csv`
+
+the output is the pytorch tensordataset
+
+## Training the GPT2
+
+Use the pytorch tensordataset to train the GPT2 (preferrably you separate the training and validation dataset how you like it)
+
+`mkdir fine_tuned_folder`
+`python train_command_line.py --epochs=1 --train_data='insert-your-training-data-here' --val_data='insert-your-validation-data-here' --model_name='fine_tuned_folder'`
+
+You'd need GPU and cuda to train GPT2. 100 iterations took me about 44 seconds on 1 Nvidia Tesla P-100.
+
+## Generating the summary
+
+To generate a summary give the input file as .txt file and the model directory where the pytorch_model.bin and the config files are kept.
+
+`python GPT2_summarize.py --input_file='input.txt' --model_directory='insert-your-model-directory-here'`
+
+---
 
 # Directory
 
@@ -25,21 +64,3 @@ I use Ignite, which is a pytorch-based library to help keeping track of training
 
 ### generate-summary-with-BERT-or-GPT2
 I figured out how to train GPT2 model to a reasonable outcome. This notebook summarizes how the data is processed from the text format to a tokenized query for summarization.
-
----
-
-## command line interface
-
-Update on June 10 2020. I added a more user friendly command line training/summarizer code for the GPT2. This is the trainGPT2.py and GPT2_summarizer.py. To use it, first you'd need Huggingface's transformer package, and a folder where you'd want to save your fine-tuned model on.
-For the training and validation dataset, refer to the notebook *pre-processing-text-for-GPT2-fine-tuning*.
-
-`pip install transformers==2.6.0`
-`mkdir fine_tuned_folder`
-
-`python train_command_line.py --epochs=1 --train_data='insert-your-training-data-here' --val_data='insert-your-validation-data-here' --model_name='fine_tuned_folder'`
-
-You'd need GPU and cuda to train GPT2. 100 iterations took me about 44 seconds on 1 Nvidia Tesla P-100.
-
-To generate a summary
-
-`python GPT2_summarize.py --input_file='input.txt' --model_directory='insert-your-model-directory-here'`
