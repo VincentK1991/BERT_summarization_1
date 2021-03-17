@@ -55,12 +55,15 @@ This folder contains colab notebooks that guide you through the summarization by
 Both BERT and GPT-2 models are implemented in the Transformer library by Huggingface. The description of each notebooks are listed below. The citation and related works are in the "generate-summary-with-BERT-or-GPT2" notebook.
 
 ### Primer-to-BERT-extractive-summarization
- 
-Tutorial for beginners, first time BERT users. Also a text summarization tool, useing BERT encoder, and topic clustering approach. This is what's called "extractive summarization", meaning, a key sentences containing crucial information is extracted from the paragraph.
+ Tutorial for beginners, first time BERT users. Also a text summarization tool, useing BERT encoder, and topic clustering approach. This is what's called "extractive summarization", meaning, a key sentences containing crucial information is extracted from the paragraph.
 
-As a companion to BERT, I added GPT2 summarization. This is so-called "abstractive summarization". I fine-tune the already pre-trained GPT2 for specific summarization task.
+As a companion to BERT, I added GPT2 summarization. This is so-called "abstractive summarization". I fine-tuned the already pre-trained GPT2 for specific summarization task.
 
-### pre-processing-text-for-GPT2-fine-tuning
+### training_BERT_keyword_extraction
+
+This notebook serves as an auxilliary work on keyword extraction. In this notebook, I fine-tuned BERT token classification on the POS tagging task and use it to do word extraction.
+
+### pre-processing_raw_text_for_GPT2_summarizer
 This notebook guides you through a pre-processing that turn the text data to a tokenized tensors that is ready for the training. The raw data can be obtained from this [website](https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge).
 
 ### fine-tune-GPT2-for-summarization
